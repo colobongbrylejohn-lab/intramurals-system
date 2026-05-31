@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Sports Registration</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/registration.css">
 </head>
 
 <body>
@@ -18,29 +18,26 @@
 
             <h2>Sports Registration</h2>
 
-            <form>
+            <form id="sportsForm">
 
-                <input type="text" placeholder="Student Name" required>
+                <input id="sports_student_name" name="student_name" type="text" placeholder="Student Name" required>
+                <input id="sports_student_number" name="student_number" type="text" placeholder="Student Number" required>
 
-                <select required>
-                    <option>Basketball</option>
-                    <option>Volleyball</option>
-                    <option>Badminton</option>
-                    <option>Pickleball</option>
-                    <option>Table Tennis</option>
-                    <option>Sepak Takraw</option>
-                    <option>Chess</option>
-                    <option>Track & Field</option>
+                <select id="sports_select" name="sport_id" required>
+                    <option value="">Loading sports...</option>
                 </select>
 
-                <select required>
+                <select id="sports_division" name="division" required>
+                    <option value="">Select division</option>
                     <option>Boys</option>
                     <option>Girls</option>
                     <option>Single</option>
                     <option>Double</option>
                 </select>
 
-                <input type="text" placeholder="Team Name" required>
+                <input id="sports_team_name" name="team_name" type="text" placeholder="Team Name (optional)">
+
+                <input id="sports_course_year" name="course_year" type="text" placeholder="Course/Year (optional)">
 
                 <button type="submit" class="btn">
                     Submit Sports Registration
@@ -55,21 +52,22 @@
 
             <h2>E-Games Registration</h2>
 
-            <form>
+            <form id="egamesForm">
 
-                <input type="text" placeholder="Student Name" required>
+                <input id="egames_student_name" name="student_name" type="text" placeholder="Student Name" required>
+                <input id="egames_student_number" name="student_number" type="text" placeholder="Student Number" required>
 
-                <select required>
-                    <option>CODM</option>
-                    <option>Mobile Legends</option>
+                <select id="egames_select" name="sport_id" required>
+                    <option value="">Loading e-games...</option>
                 </select>
 
-                <select required>
+                <select id="egames_division" name="division" required>
+                    <option value="">Select division</option>
                     <option>Boys</option>
                     <option>Girls</option>
                 </select>
 
-                <input type="text" placeholder="Team Name" required>
+                <input id="egames_team_name" name="team_name" type="text" placeholder="Team Name (optional)">
 
                 <button type="submit" class="btn">
                     Submit E-Games Registration
