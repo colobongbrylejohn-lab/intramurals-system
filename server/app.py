@@ -20,9 +20,14 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-app = Flask(__name__)
+static_dir = ROOT / 'intramurals-system'
+app = Flask(__name__, static_folder=str(static_dir), static_url_path='')
 CORS(app)
 app.teardown_appcontext(close_connection)
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 @app.route('/api/sports', methods=['GET'])
 def list_sports():
