@@ -1,25 +1,85 @@
 
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: white;
+    color: black;
+}
+
 .sidebar {
     width: 250px;
     height: 100vh;
-    background: #111827;
-    color: white;
+    background: #ffffff;
+    color: black;
     padding: 20px;
     position: fixed;
+    border-right: 1px solid #ccc;
+}
+
+.sidebar img {
+    display: block;
+    margin-bottom: 20px;
 }
 
 .sidebar a {
     display: block;
-    color: white;
+    color: black;
     text-decoration: none;
     padding: 10px;
     margin: 5px 0;
+    border-radius: 4px;
 }
 
 .sidebar a:hover {
-    background: #374151;
+    background: #f0f0f0;
 }
 
 .settings {
     margin-top: 20px;
+}
+
+.settings input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: black;
+    background: #fff;
+}
+
+.settings button,
+.back-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.settings button:hover,
+.back-btn:hover {
+    opacity: 0.9;
+}
+
+.content {
+    margin-left: 280px;
+    padding: 40px;
+}
+
+.info-card {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.info-card h2 {
+    margin-top: 0;
+}
+
+.info-card p {
+    margin: 8px 0;
 }

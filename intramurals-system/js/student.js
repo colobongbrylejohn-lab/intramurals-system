@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    const defaultSportsOptions = sportsSelect.innerHTML;
+    const defaultEgamesOptions = egamesSelect.innerHTML;
+
     // registration toggle using two buttons (Register Sports / Register E-Games)
     const btnSports = document.getElementById('registerSportsBtn');
     const btnEgames = document.getElementById('registerEgamesBtn');
@@ -83,8 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => {
             console.error('Failed to load sports', err);
-            sportsSelect.innerHTML = '<option value="">Failed to load sports</option>';
-            egamesSelect.innerHTML = '<option value="">Failed to load e-games</option>';
+            sportsSelect.innerHTML = defaultSportsOptions;
+            egamesSelect.innerHTML = defaultEgamesOptions;
         });
 
     async function submitRegistration(data) {
