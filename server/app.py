@@ -3,6 +3,7 @@ from flask_cors import CORS
 import sqlite3
 from pathlib import Path
 import os
+from waitress import serve
 
 ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = os.environ.get('INTRAMURALS_DB') or str(ROOT / 'data' / 'intramurals.db')
@@ -20,9 +21,14 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-app = Flask(__name__)
+static_dir = ROOT / 'intramurals-system'
+app = Flask(__name__, static_folder=str(static_dir), static_url_path='')
 CORS(app)
 app.teardown_appcontext(close_connection)
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 @app.route('/api/sports', methods=['GET'])
 def list_sports():
@@ -102,4 +108,4 @@ def list_students():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     print('Using DB at:', DB_PATH)
-    app.run(host='0.0.0.0', port=port, debug=True)
+    serve(app, host='0.0.0.0', port=port)

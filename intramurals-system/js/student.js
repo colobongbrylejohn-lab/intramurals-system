@@ -1,46 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API = (window.INTRAMURALS_API_BASE || 'http://localhost:5000') + '/api';
+    const useLocalApi = !window.INTRAMURALS_API_BASE && (
+        window.location.protocol === 'file:' ||
+        (window.location.hostname.match(/^(localhost|127\.0\.0\.1)$/) && window.location.port !== '5000')
+    );
+    const API = window.INTRAMURALS_API_BASE
+        ? `${window.INTRAMURALS_API_BASE}/api`
+        : useLocalApi
+            ? 'http://localhost:5000/api'
+            : '/api';
 
-    // Elements
     const sportsSelect = document.getElementById('sports_select');
     const egamesSelect = document.getElementById('egames_select');
+    if (!sportsSelect || !egamesSelect) {
+        console.error('Registration select elements not found');
+        return;
+    }
 
-    // Fetch sports and populate selects
-    fetch(`${API}/sports`).then(r => r.json()).then(list => {
-        sportsSelect.innerHTML = '<option value="">Select sport</option>';
-        egamesSelect.innerHTML = '<option value="">Select e-game</option>';
-        list.forEach(s => {
-            const opt = document.createElement('option');
-            opt.value = s.id;
-            opt.textContent = s.sport_name;
-            sportsSelect.appendChild(opt);
+    sportsSelect.innerHTML = '<option value="">Loading sports...</option>';
+    egamesSelect.innerHTML = '<option value="">Loading e-games...</option>';
 
-            if ((s.category || '').toLowerCase().includes('e-game') || s.sport_name.toLowerCase().includes('codm') || s.sport_name.toLowerCase().includes('mobile')) {
-                const eopt = opt.cloneNode(true);
-                egamesSelect.appendChild(eopt);
+    fetch(`${API}/sports`)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`API returned status ${res.status}`);
             }
-        });
-    }).catch(err => {
-        console.error('Failed to load sports', err);
-        sportsSelect.innerHTML = '<option value="">Failed to load</option>';
-        egamesSelect.innerHTML = '<option value="">Failed to load</option>';
-    });
+            return res.json();
+        })
+        .then(list => {
+            if (!Array.isArray(list)) {
+                throw new Error('Invalid response format from /api/sports');
+            }
 
-    // Helper to POST registration
+            sportsSelect.innerHTML = '<option value="">Select sport</option>';
+            egamesSelect.innerHTML = '<option value="">Select e-game</option>';
+
+            list.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.id;
+                opt.textContent = s.sport_name;
+                sportsSelect.appendChild(opt);
+
+                const category = (s.category || '').toLowerCase();
+                const name = (s.sport_name || '').toLowerCase();
+                if (category.includes('e-game') || name.includes('codm') || name.includes('mobile')) {
+                    egamesSelect.appendChild(opt.cloneNode(true));
+                }
+            });
+        })
+        .catch(err => {
+            console.error('Failed to load sports', err);
+            sportsSelect.innerHTML = '<option value="">Failed to load sports</option>';
+            egamesSelect.innerHTML = '<option value="">Failed to load e-games</option>';
+        });
+
     async function submitRegistration(data) {
         const res = await fetch(`${API}/register`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         });
+
         if (!res.ok) {
             const err = await res.json().catch(() => ({}));
             throw new Error(err.error || 'Failed to submit');
         }
+
         return res.json();
     }
 
-    // Sports form handler
     const sportsForm = document.getElementById('sportsForm');
     if (sportsForm) {
         sportsForm.addEventListener('submit', async (e) => {
@@ -63,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // E-games form handler
     const egamesForm = document.getElementById('egamesForm');
     if (egamesForm) {
         egamesForm.addEventListener('submit', async (e) => {
@@ -84,5 +110,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
 });
