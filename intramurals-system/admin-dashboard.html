@@ -6,74 +6,75 @@
 </head>
 <body>
     <div class="sidebar">
-        <img src="pictures/images-removebg-preview.png" alt="PSU" width="100"height="100"> 
+        <img src="pictures/images-removebg-preview.png" alt="PSU" width="100" height="100">
 
-        
+        <a href="manage-events.html">Manage Events</a>
+        <a href="manage-users.html">Manage Users</a>
+        <a href="participants.html">Participants</a>
+        <a href="approvals.html">Approvals</a>
 
-<a href="manage-events.html">
-Manage Events
-</a>
-
-<a href="manage-users.html">
-Manage Users
-</a>
-
-<a href="participants.html">
-Participants
-</a>
-
-<a href="approvals.html">
-Approvals
-</a>
-
-<div class="settings">
-
-<h2>Change Admin Password</h2>
-
-<input type="password"
-       id="currentPass"
-       placeholder="Current Password">
-
-<input type="password"
-       id="newPass"
-       placeholder="New Password">
-
-<button onclick="changePassword()">
-    Update Password
-</button>
-
-</div>
-<button class="back-btn" onclick="goBack()">
-⬅ Back
-</button>
-</div>
-
-<div class="content">
-    <h1>Admin Overview</h1>
-    <p>Example information shown for reference.</p>
-
-    <div class="info-card">
-        <h2>Example 1: Event</h2>
-        <p><strong>Title:</strong> Basketball Tournament</p>
-        <p><strong>Date:</strong> June 14</p>
-        <p><strong>Venue:</strong> Main Gym</p>
+        <div class="settings">
+            <h2>Change Admin Password</h2>
+            <input type="password" id="currentPass" placeholder="Current Password">
+            <input type="password" id="newPass" placeholder="New Password">
+            <button onclick="changePassword()">Update Password</button>
+        </div>
+        <button class="back-btn" onclick="goBack()">⬅ Back</button>
     </div>
 
-    <div class="info-card">
-        <h2>Example 2: User</h2>
-        <p><strong>Name:</strong> Jane Doe</p>
-        <p><strong>Role:</strong> Event Coordinator</p>
-        <p><strong>Contact:</strong> jane@example.com</p>
+    <div class="main-content">
+        <h1>Admin Dashboard</h1>
+
+        <section class="examples-section">
+            <h2>Example Registrations</h2>
+            <p>These sample entries show full registration details for the admin page.</p>
+            <div class="example-grid">
+                <div class="example-card">
+                    <h3>Team sport registration</h3>
+                    <p><strong>Student Name:</strong> John Doe</p>
+                    <p><strong>Student Number:</strong> 2026001</p>
+                    <p><strong>Sport:</strong> Basketball</p>
+                    <p><strong>Division:</strong> Boys</p>
+                    <p><strong>Course & Year:</strong> BSE_1</p>
+                    <p><strong>Team Name:</strong> Alpha Squad</p>
+                </div>
+                <div class="example-card">
+                    <h3>Team sport registration</h3>
+                    <p><strong>Student Name:</strong> Jane Reyes</p>
+                    <p><strong>Student Number:</strong> 2026002</p>
+                    <p><strong>Sport:</strong> Volleyball</p>
+                    <p><strong>Division:</strong> Girls</p>
+                    <p><strong>Course & Year:</strong> BSE_1</p>
+                    <p><strong>Team Name:</strong> Beta Crew</p>
+                </div>
+                <div class="example-card">
+                    <h3>Individual sport registration</h3>
+                    <p><strong>Student Name:</strong> Alex Cruz</p>
+                    <p><strong>Student Number:</strong> 2026003</p>
+                    <p><strong>Sport:</strong> Badminton</p>
+                    <p><strong>Division:</strong> Singles</p>
+                    <p><strong>Course & Year:</strong> BSE_1</p>
+                    <p><strong>Team Name:</strong> N/A</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="flow-section">
+            <h2>Sport selection flow</h2>
+            <p>Follow this flow to separate team sports and individual sports on the admin page.</p>
+            <div class="flow-card">
+                <p><strong>Team/Sports:</strong> Basketball, Volleyball</p>
+                <p><strong>Individual Sports:</strong> Chess, Badminton, Pickleball</p>
+            </div>
+            <div class="flow-chart">
+                <div class="flow-step">Admin</div>
+                <div class="flow-step">Choose sport option</div>
+                <div class="flow-step">Team/Sports or Individual</div>
+                <div class="flow-step">Show category details</div>
+            </div>
+        </section>
     </div>
 
-    <div class="info-card">
-        <h2>Example 3: Approval</h2>
-        <p><strong>Team:</strong> Volleyball</p>
-        <p><strong>Status:</strong> Registration Pending</p>
-        <p><strong>Notes:</strong> Awaiting payment confirmation</p>
-    </div>
-</div>
-
-<script src="js/admin.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 </html>
