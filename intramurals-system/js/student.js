@@ -16,6 +16,40 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // registration toggle using two buttons (Register Sports / Register E-Games)
+    const btnSports = document.getElementById('registerSportsBtn');
+    const btnEgames = document.getElementById('registerEgamesBtn');
+    const sportsBox = document.getElementById('sportsBox');
+    const egamesBox = document.getElementById('egamesBox');
+
+    function showSports() {
+        if (sportsBox && egamesBox) {
+            sportsBox.style.display = '';
+            egamesBox.style.display = 'none';
+        }
+        if (btnSports && btnEgames) {
+            btnSports.classList.add('active');
+            btnEgames.classList.remove('active');
+        }
+    }
+
+    function showEgames() {
+        if (sportsBox && egamesBox) {
+            sportsBox.style.display = 'none';
+            egamesBox.style.display = '';
+        }
+        if (btnSports && btnEgames) {
+            btnEgames.classList.add('active');
+            btnSports.classList.remove('active');
+        }
+    }
+
+    if (btnSports) btnSports.addEventListener('click', (e) => { e.preventDefault(); showSports(); });
+    if (btnEgames) btnEgames.addEventListener('click', (e) => { e.preventDefault(); showEgames(); });
+
+    // default view
+    showSports();
+
     sportsSelect.innerHTML = '<option value="">Loading sports...</option>';
     egamesSelect.innerHTML = '<option value="">Loading e-games...</option>';
 

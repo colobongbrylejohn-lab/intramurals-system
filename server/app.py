@@ -105,6 +105,40 @@ def list_students():
     rows = [dict(r) for r in cur.fetchall()]
     return jsonify(rows)
 
+@app.route('/api/student/login', methods=['POST'])
+def login():
+    payload = request.get_json() or {}
+    required = ('student_number',)
+    if not all(k in payload for k in required):
+        return jsonify({'error': 'missing student_number'}), 400
+
+    student_number = payload.get('student_number').strip()
+
+    db = get_db()
+    cur = db.execute('SELECT id, student_name FROM students WHERE student_number = ?;', (student_number,))
+    r = cur.fetchone()
+    if not r:
+        return jsonify({'error': 'student not found'}), 404
+
+    return jsonify({'ok': True, 'student_id': r['id'], 'student_name': r['student_name']}), 200
+
+@app.route('/api/admin/login', methods=['POST'])
+def admin_login():
+    payload = request.get_json() or {}
+    required = ('username', 'password')
+    if not all(k in payload for k in required):
+        return jsonify({'error': 'missing username or password'}), 400
+
+    username = payload.get('username').strip()
+    password = payload.get('password').strip()
+
+    # Placeholder for admin login logic - replace with actual authentication
+    if username == 'admin' and password == 'password':
+        return jsonify({'ok': True, 'admin_id': 1, 'admin_name': 'Admin'}), 200
+    else:
+        return jsonify({'error': 'invalid credentials'}), 401
+
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     print('Using DB at:', DB_PATH)

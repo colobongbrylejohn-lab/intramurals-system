@@ -13,8 +13,13 @@
 
     <div class="form-wrapper">
 
+        <div style="text-align:center; margin-bottom:16px;">
+            <button id="registerSportsBtn" class="reg-toggle btn">Register Sports</button>
+            <button id="registerEgamesBtn" class="reg-toggle btn">Register E-Games</button>
+        </div>
+
         <!-- SPORTS SECTION -->
-        <div class="form-box">
+        <div id="sportsBox" class="form-box">
 
             <h2>Sports Registration</h2>
 
@@ -23,7 +28,7 @@
                 <input id="sports_student_name" name="student_name" type="text" placeholder="Student Name" required>
                 <input id="sports_student_number" name="student_number" type="text" placeholder="Student Number" required>
 
-                <select id="sport" required>
+                <select id="sports_select" required>
                     <option value="">Select Sport</option>
                     <option value="Basketball">Basketball</option>
                     <option value="Volleyball">Volleyball</option>
@@ -56,7 +61,7 @@
         </div>
 
         <!-- E-GAMES SECTION -->
-        <div class="form-box">
+        <div id="egamesBox" class="form-box">
 
             <h2>E-Games Registration</h2>
 
