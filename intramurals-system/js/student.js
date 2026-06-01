@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API = window.INTRAMURALS_API_BASE ? `${window.INTRAMURALS_API_BASE}/api` : '/api';
+    const useLocalApi = !window.INTRAMURALS_API_BASE && (
+        window.location.protocol === 'file:' ||
+        (window.location.hostname.match(/^(localhost|127\.0\.0\.1)$/) && window.location.port !== '5000')
+    );
+    const API = window.INTRAMURALS_API_BASE
+        ? `${window.INTRAMURALS_API_BASE}/api`
+        : useLocalApi
+            ? 'http://localhost:5000/api'
+            : '/api';
 
     const sportsSelect = document.getElementById('sports_select');
     const egamesSelect = document.getElementById('egames_select');

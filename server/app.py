@@ -3,6 +3,7 @@ from flask_cors import CORS
 import sqlite3
 from pathlib import Path
 import os
+from waitress import serve
 
 ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = os.environ.get('INTRAMURALS_DB') or str(ROOT / 'data' / 'intramurals.db')
@@ -107,4 +108,4 @@ def list_students():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     print('Using DB at:', DB_PATH)
-    app.run(host='0.0.0.0', port=port, debug=True)
+    serve(app, host='0.0.0.0', port=port)

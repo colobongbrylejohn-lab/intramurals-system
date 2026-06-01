@@ -1,6 +1,6 @@
 # Intramurals API
 
-Start the Flask API (ensure dependencies installed):
+Start the API with a production WSGI server (ensure dependencies installed):
 
 ```bash
 python3 -m pip install -r server/requirements.txt
